@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hovel Ideas | Novel ideas with a soul</title>
+  <meta name="description" content="Hovel Ideas is a West Texas creative workshop for books, tools, inventions, safety concepts, and practical ideas with a soul." />
+  <meta property="og:title" content="Hovel Ideas" />
+  <meta property="og:description" content="Novel ideas with a soul. Built by Tom Mitchell." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --bg: #100f0d;
+      --panel: #1b1814;
+      --panel2: #241f19;
+      --text: #f4ead8;
+      --muted: #c9b99d;
+      --rust: #b76534;
+      --gold: #d4a64d;
+      --smoke: #6f8791;
+      --line: rgba(244,234,216,.16);
+      --shadow: rgba(0,0,0,.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(183,101,52,.28), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(111,135,145,.22), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(212,166,77,.14), transparent 34%),
+        linear-gradient(135deg, #0d0c0b 0%, #17120f 52%, #100f0d 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 85%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(16,15,13,.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--rust), var(--gold));
+      color: #15100d;
+      box-shadow: 0 10px 30px var(--shadow);
+      font-family: Georgia, serif;
+      font-weight: 900;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    .navlinks a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero {
+      padding: 88px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 800;
+      font-size: .78rem;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 9vw, 7.4rem);
+      letter-spacing: -.055em;
+      max-width: 780px;
+    }
+
+    .tagline {
+      margin: 22px 0 0;
+      font-size: clamp(1.35rem, 3vw, 2.15rem);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .lead {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 740px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+      color: var(--text);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--rust), var(--gold));
+      color: #15100d;
+      border: none;
+      box-shadow: 0 18px 50px rgba(183,101,52,.22);
+    }
+
+    .hero-card {
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: 0 26px 80px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: rgba(212,166,77,.18);
+      filter: blur(6px);
+    }
+
+    .quote {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.75rem;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .quote-small {
+      color: var(--muted);
+      margin-top: 18px;
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 46px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 30px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -.04em;
+    }
+
+    .section-note {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 210px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+
+    .card h3 {
+      font-size: 1.38rem;
+      margin-bottom: 12px;
+      color: #fff3df;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .number {
+      display: inline-block;
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: .12em;
+      margin-bottom: 14px;
+      font-size: .78rem;
+      text-transform: uppercase;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 28px;
+    }
+
+    .panel.big {
+      background:
+        linear-gradient(135deg, rgba(183,101,52,.18), rgba(111,135,145,.12)),
+        rgba(255,255,255,.045);
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin: 14px 0 0;
+    }
+
+    .statement {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .contact {
+      text-align: center;
+      padding-bottom: 76px;
+    }
+
+    .contact-card {
+      margin: 0 auto;
+      max-width: 780px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(212,166,77,.24), transparent 32%),
+        linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 36px 24px;
+      box-shadow: 0 26px 80px var(--shadow);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .email {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      color: var(--gold);
+      font-weight: 900;
+      word-break: break-word;
+    }
+
+    footer {
+      color: rgba(244,234,216,.55);
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 12px;
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .navlinks {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Hovel Ideas home">
+        <span class="mark">H</span>
+        <span>Hovel Ideas</span>
+      </a>
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <a href="#community">Community</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">West Texas creative workshop</div>
+          <h1>Hovel Ideas</h1>
+          <p class="tagline">Novel ideas with a soul.</p>
+          <p class="lead">
+            Hovel Ideas is a creative workshop, idea-building company, and community for people trying to turn rough sparks into real things: books, tools, inventions, safety concepts, and practical projects that help somebody.
+          </p>
+          <div class="buttons">
+            <a class="button primary" href="mailto:thomas.mitchell@hovelideas.com">Email Tom</a>
+            <a class="button" href="#projects">See the work</a>
+            <a class="button" href="#community">The community</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Hovel Ideas mission">
+          <p class="quote">
+            Good ideas should not die because people do not have the money, polish, connections, or perfect vocabulary to explain them yet.
+          </p>
+          <p class="quote-small">
+            This is where rough ideas get a workbench.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What we’re building</h2>
+          <p class="section-note">
+            Some are technology tools. Some are safety concepts. Some are books. Some are inventions. The common thread is simple: build something that helps.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <span class="number">01</span>
+            <h3>SafeSchool</h3>
+            <p>A student support and school safety concept built around quiet communication, compassion, accountability, and help before the crisis gets louder.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">02</span>
+            <h3>Hovel Editor</h3>
+            <p>A structured editorial tool for serious writing, manuscripts, reports, essays, and professional documents. Honest feedback without sanding the soul out of the work.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">03</span>
+            <h3>The Ideanator</h3>
+            <p>A guided idea-development tool for the messy beginning: business ideas, product concepts, pitches, grants, speeches, essays, and raw thoughts that need shape.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">04</span>
+            <h3>WILL’d</h3>
+            <p>A legacy and memory-centered concept built around preserving meaning, intent, and human connection beyond ordinary paperwork.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">05</span>
+            <h3>Memory Garden Lamp</h3>
+            <p>A remembrance concept built around grief, light, ritual, and presence. A gentle physical answer to memory, loss, and love that stays.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">06</span>
+            <h3>Halo Wrist Lamp</h3>
+            <p>A hands-free lighting concept for workers, makers, mechanics, and problem-solvers who need the light to follow the work.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">07</span>
+            <h3>Books by Tom Mitchell</h3>
+            <p>Novels, essays, and stories published through Tom Mitchell and Hovel Ideas: grief, faith, family, absurdity, tenderness, and the strange holy mess of being human.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">08</span>
+            <h3>Founder tools</h3>
+            <p>Practical idea-shaping systems built for people who have more vision than vocabulary and more grit than polish.</p>
+          </article>
+
+          <article class="card">
+            <span class="number">09</span>
+            <h3>Community</h3>
+            <p>A place for like-minded people carrying napkin sketches, half-built dreams, grief-made visions, and practical fixes for problems the world keeps ignoring.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="wrap split">
+        <div class="panel big">
+          <p class="statement">
+            Build something that helps.<br />
+            Build something with a soul.
+          </p>
+          <p>
+            Not slick for the sake of slick. Not technology for the sake of technology. Not hustle culture with a better font.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2>The Hovel</h2>
+          <p>
+            Hovel Ideas is a gathering place for writers, teachers, parents, founders, builders, inventors, students, oddballs, and anyone carrying an idea that might help somebody.
+          </p>
+          <p>
+            It is where lived experience, stubborn hope, practical imagination, and useful technology sit at the same crooked table.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="contact-card">
+          <div class="eyebrow">Connect</div>
+          <h2>Built by Tom Mitchell</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto;">
+            Writer. Founder. Idea mechanic. Husband. Father. Occasional raccoon near fermented fruit.
+          </p>
+          <a class="email" href="mailto:thomas.mitchell@hovelideas.com">thomas.mitchell@hovelideas.com</a>
+          <div class="buttons" style="justify-content:center;">
+            <a class="button primary" href="mailto:thomas.mitchell@hovelideas.com">Start a conversation</a>
+            <a class="button" href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Hovel Ideas. Novel ideas with a soul.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
